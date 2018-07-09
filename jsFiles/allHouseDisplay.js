@@ -1,5 +1,5 @@
 function displayAllStandings(){
-	var svgWidth = 500;
+	var svgWidth = 50;
 	var svgHeight = 6500;
 	var rectHeight = 10;
 	var senatorObject = JSON.parse(senatorData);
@@ -7,13 +7,13 @@ function displayAllStandings(){
 	var senatorNameList = Object.keys(senatorObject);
 	var allSenators =[];
 	var svg = d3.select('body').append('svg')
-	.attr("width", svgWidth)
+	.attr("width", svgWidth+"%")
 	.attr("height", svgHeight);
 
 	var textSVG = d3.select('body').append('svg')
-	.attr("width", svgWidth)
+	.attr("width", svgWidth+"%")
 	.attr("height", svgHeight)
-	.attr("x", svgWidth);
+	.attr("x", svgWidth+"%");
 
 	var defs = svg.append("defs");
 	var linearGradient =  defs.append("linearGradient")
@@ -42,7 +42,8 @@ function displayAllStandings(){
 				.data(votingArray)
 				.enter()
 				.append('p')
-				.text(function(d, i){
+				.text(function(d, 
+				i){
 					if(d === 'Yea' || d === 'Aye') {
 						politicalStanding = politicalStanding - (billObject[i][6] - billObject[i][5]);
 						timesVoted++;
@@ -54,6 +55,7 @@ function displayAllStandings(){
 					return i + " " + d + " " + politicalStanding/timesVoted;
 					//return i + ":" + d + " " + billObject[i][0] + " " + billObject[i][1];
 				})*/
+
 		for (a=0; a<votingArray.length; a++){
 			var temp = votingArray[a];
 			if(temp === 'Yea' || temp === 'Aye') {
@@ -115,7 +117,9 @@ function displayAllStandings(){
 	   .data(allSenators)
 	   .enter()
 	   .append('rect')
-	   .attr("width", svgWidth)
+	   .attr("width", function(d){
+	   		return svg.style("width");
+	   })
 	   .attr("height", rectHeight)
 	   .attr('y', function(d,i) {return (i*15)+2})
 	   .text("att")
@@ -132,8 +136,9 @@ function displayAllStandings(){
 
 	   		tempStoreData = ((tempStoreData[0]-minValue)/(maxValue-minValue));
 
+	   		//return tempStoreData*svgWidth;
+	   		return tempStoreData*100 + "%";
 
-	   		return tempStoreData*svgWidth;
 	   });
 }
 
