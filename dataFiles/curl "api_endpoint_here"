@@ -1,0 +1,5 @@
+curl "api_endpoint_here"
+
+-H "X-API-Key: ga9P5CZfPQNV9zaGdoj4xmxkxEPYYGnzvtNaKVJP"
+installed beautifulSoup
+
